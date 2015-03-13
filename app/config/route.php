@@ -1,6 +1,6 @@
 <?php
 return array(
     
-    'sample' => array('/sample/:action', array('module' => 'sample', 'action' => 'index',)),
+    'default' => array('/:module/:action', array('module' => 'index', 'action' => 'index',)),
     
 );

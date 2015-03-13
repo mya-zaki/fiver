@@ -1,7 +1,6 @@
 <?php
-
 // bootstrap
-require_once dirname(realpath(__FILE__)) . '/src/app/lib/Fiver/bootstrap/bootstrap.php';
+require_once dirname(dirname(realpath(__FILE__))) . '/app/lib/Fiver/bootstrap/bootstrap.php';
 
 // routing
 $request_url_path = rtrim(parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH), '/');

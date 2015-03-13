@@ -44,12 +44,12 @@ abstract class Fiver_Action extends Page
         return $this->container[$name];
     }
     
-    protected function createMessageObject($name, $message)
-    {
-        $clazz = new stdClass();
-        $clazz->$name = $message;
-        return $clazz;
-    }
+//     protected function createMessageObject($name, $message)
+//     {
+//         $clazz = new stdClass();
+//         $clazz->$name = $message;
+//         return $clazz;
+//     }
     
     private function render()
     {

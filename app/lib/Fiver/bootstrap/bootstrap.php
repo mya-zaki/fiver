@@ -1,5 +1,7 @@
 <?php
 
+define('FIVER_VERSION', '0.1.0');
+
 //base path
 define('APP', dirname(dirname(dirname(dirname(realpath(__FILE__))))));
 define('ROOT', APP . '/..');

@@ -16,7 +16,7 @@ class Fiver_Dispatcher
         
         addIncludePath(APP . '/lib/Fiver/action');
         addIncludePath(APP . '/action/' . $module_name_ucfirst);
-        $action = new $action_class();
+        $action = new $action_class($module_name_ucfirst, $action_name_ucfirst);
         
         if (!is_null($previous_action)) {
             $action->input = $previous_action->input;

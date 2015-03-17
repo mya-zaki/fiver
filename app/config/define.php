@@ -1,8 +1,6 @@
 <?php
 /**
  * Define
- * 
- * Fiver v0.0.1
  */
 
 /**

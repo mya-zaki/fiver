@@ -1,7 +1,5 @@
 <?php
 
-define('FIVER_VERSION', '0.1.0');
-
 //base path
 define('APP', dirname(dirname(dirname(dirname(realpath(__FILE__))))));
 define('ROOT', APP . '/..');
@@ -21,10 +19,6 @@ require_once dirname(realpath(__FILE__)) . '/../helper/functions.php';
 
 // bootstrap
 require_once APP . '/bootstrap/bootstrap.php';
-
-// config
-require_once APP . '/config/define.php';
-require_once APP . '/config/config.php';
 
 function addIncludePath($new_include_path)
 {

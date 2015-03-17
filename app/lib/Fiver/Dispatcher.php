@@ -10,13 +10,13 @@ class Fiver_Dispatcher
         $action_name_ucfirst = ucfirst(strtolower($action_name));
         $action_class = $module_name_ucfirst . '_' . $action_name_ucfirst . 'Action';
         
-        if (!is_readable(APP . '/action/' . $module_name_ucfirst . '/' . $action_name_ucfirst . 'Action.php')) {
-            $action_class = 'Error_404Action';
-        }
-        
         addIncludePath(APP . '/lib/Fiver/action');
         addIncludePath(APP . '/action/' . $module_name_ucfirst);
-        $action = new $action_class($module_name_ucfirst, $action_name_ucfirst);
+        if (is_readable(APP . '/action/' . $module_name_ucfirst . '/' . $action_name_ucfirst . 'Action.php')) {
+            $action = new $action_class($module_name_ucfirst, $action_name_ucfirst);
+        } else {
+            $action = new Error_404Action('Error', '404');
+        }
         
         if (!is_null($previous_action)) {
             $action->input = $previous_action->input;

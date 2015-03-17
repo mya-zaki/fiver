@@ -1,57 +1,40 @@
 <?php
 /**
  * FiverTE - PHP Template Engine used phpQuery
- *
- * PHP version 5
- *
- * @package   FiverTE
- * @link      https://github.com/mya-zaki/fiverTE
- * @author    mya-zaki
- * @copyright 2009-2010 Matsuo Masaru
- * @license   http://opensource.org/licenses/bsd-license.php New BSD License
+ * 
+ * require php-dom package.
+ *   e.g yum install php-dom
+ * 
  */
-require_once 'FiverTE/Page.php';
 
-/**
- * FiverTE
- *
- * @package FiverTE
- * @author  mya-zaki
- */
+require_once 'FiverTE/vendor/phpQuery-onefile.php';
+require_once 'FiverTE/Exception.php';
+
 class FiverTE
 {
-    /** @var const string Version */ 
-    const VERSION = '0.1.0';
-
-    /**
-     * constructor
-     */
-    public function __construct()
+    protected $template_path;
+    
+    protected $pqdoc;
+    
+    public function __construct($template_path)
     {
+        if (!is_readable($template_path)) {
+            throw new FiverTE_Exception();
+        }
+        $this->template_path = $template_path;
+        
+        $this->pqdoc = phpQuery::newDocumentFileHTML($this->template_path);
     }
-
-    /**
-     * render page
-     * 
-     * @param Page $page page object
-     */
-    public function render(Page $page)
+    
+    public function text($selectors, $text)
     {
-        echo $this->execute($page);
+        return $this->pqdoc->find($selectors)->text($text);
     }
-
-    /**
-     * return the output of the page.
-     * 
-     * @param Page $page page object
-     * @return string Output
-     */
-    public function execute(Page $page)
+    
+    
+    public function fetch()
     {
-        $dom = $page->getDom();
-        $contents = $dom->save();
-        $dom->clear();
-        unset($dom);
-        return $contents;
+        return $this->pqdoc->html();
     }
+    
 }

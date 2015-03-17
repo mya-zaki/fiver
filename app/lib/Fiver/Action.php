@@ -1,12 +1,12 @@
 <?php
-// require_once 'Smoochy/Smoochy.php';
-require_once 'phpQuery/phpQuery-onefile.php';
+require_once 'FiverTE/FiverTE.php';
 
 abstract class Fiver_Action //extends Page
 {
     protected $buffer = '';
     
 //     protected $smoochy;
+    const TEMPLATE_EXTENSION = '.html';
     
     protected $module;
     protected $action;
@@ -14,37 +14,34 @@ abstract class Fiver_Action //extends Page
     public $input;
     public $container;
     
-    protected $template;
-    protected $template_extension = '.html';
+    protected $template_dir;
     
     public function __construct($module, $action)
     {
-//         $this->smoochy = new Smoochy();
-//         $this->setTemplateDirectory(APP . '/template/');
-
         $this->module = $module;
         $this->action = $action;
         
-        $this->setTemplate($module . '/' . strtolower($action) . $this->template_extension);
-        
-        // APP . '/template/' . 
+        $this->setTemplateDirectory(APP . '/template');
         
         $this->input = new Fiver_Input();
+        
     }
     
     final public function _run()
     {
         $this->before();
         
-        // cache
-        
         $this->main();
         
-        $this->_render();
+        try {
+            $view = new FiverTE($this->template_dir . '/' . $this->module . '/' . strtolower($this->action) . self::TEMPLATE_EXTENSION);
+            $this->render($view);
+            $this->buffer = $view->fetch();
+        } catch (FiverTE_Exception $fte) {
+            $this->render(null);
+        }
         
         $this->after();
-        
-        // /cache
         
         return $this->buffer;
     }
@@ -52,7 +49,7 @@ abstract class Fiver_Action //extends Page
     abstract protected function before();
     abstract protected function after();
     abstract protected function main();
-    abstract protected function render(phpQueryObject $pqdoc);
+//     abstract protected function render(phpQueryObject $pqdoc = null);
     
     protected function addContainer($name, $data)
     {
@@ -64,9 +61,9 @@ abstract class Fiver_Action //extends Page
         return $this->container[$name];
     }
     
-    protected function setTemplate($path)
+    protected function setTemplateDirectory($dir)
     {
-        $this->template = $path;
+        $this->template_dir = $dir;
     }
     
 //     protected function createMessageObject($name, $message)
@@ -75,15 +72,6 @@ abstract class Fiver_Action //extends Page
 //         $clazz->$name = $message;
 //         return $clazz;
 //     }
-    
-    private function _render()
-    {
-        $pqdoc = phpQuery::newDocumentFile(APP . '/template/' . $this->template);
-        
-        $this->render($pqdoc);
-//         parent::__construct();
-//         $this->buffer = $this->smoochy->execute($this);
-    }
     
     protected function redirect($location, $http_code = '302')
     {

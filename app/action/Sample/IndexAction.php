@@ -5,10 +5,12 @@ class Sample_IndexAction extends BaseAction
     protected function main()
     {
         $this->content_text = 'Sample!';
+        
+//         $this->view('html');
     }
     
-    public function contents()
+    public function render($view)
     {
-        $this->_query->text('Sample!');
+        $view->text('#contents', $this->content_text);
     }
 }

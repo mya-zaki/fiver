@@ -14,8 +14,11 @@ function redirect302($location)
     exit;
 }
 
-function dd($expression)
+function dd($expression = null)
 {
+    if (!isset($expression)) {
+        $expression = debug_backtrace();
+    }
     var_dump($expression);
     exit;
 }

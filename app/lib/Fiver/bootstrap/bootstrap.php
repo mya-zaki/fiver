@@ -1,5 +1,4 @@
 <?php
-
 //base path
 define('APP', dirname(dirname(dirname(dirname(realpath(__FILE__))))));
 define('ROOT', APP . '/..');
@@ -10,6 +9,9 @@ define('STORAGE', ROOT . '/storage');
 addIncludePath(VENDOR);
 addIncludePath(APP . '/action');
 addIncludePath(APP . '/lib');
+
+// logger
+require_once('log4php/Logger.php');
 
 // autoload
 require_once dirname(realpath(__FILE__)) . '/autoload.php';

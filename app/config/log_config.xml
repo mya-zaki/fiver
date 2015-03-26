@@ -1,0 +1,16 @@
+<configuration xmlns="http://logging.apache.org/log4php/">
+    <appender name="default" class="LoggerAppenderFile">
+        <param name="file" value="../storage/log/app.log" />
+        <!-- <layout class="LoggerLayoutPattern">
+            <param name="conversionPattern" value="%date{Y-m-d H:i:s.u} %logger %-5level  %sessionid %file(%line) %msg%n" />
+        </layout> -->
+    </appender>
+    <root>
+        <level value="warn" />
+        <appender_ref ref="default" />
+    </root>
+    <logger name="myLogger">
+        <level value="info" />
+        <appender_ref ref="default" />
+    </logger>
+</configuration>

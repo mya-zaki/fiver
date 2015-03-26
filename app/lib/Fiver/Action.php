@@ -1,12 +1,11 @@
 <?php
 require_once 'FiverTE/FiverTE.php';
 
-abstract class Fiver_Action //extends Page
+abstract class Fiver_Action
 {
-    protected $buffer = '';
-    
-//     protected $smoochy;
     const TEMPLATE_EXTENSION = '.html';
+    
+    protected $buffer = '';
     
     protected $module;
     protected $action;
@@ -21,10 +20,10 @@ abstract class Fiver_Action //extends Page
         $this->module = $module;
         $this->action = $action;
         
+        $this->input     = new Fiver_Input();
+        $this->container = new Fiver_Container();
+        
         $this->setTemplateDirectory(APP . '/template');
-        
-        $this->input = new Fiver_Input();
-        
     }
     
     final public function _run()
@@ -49,16 +48,10 @@ abstract class Fiver_Action //extends Page
     abstract protected function before();
     abstract protected function after();
     abstract protected function main();
-//     abstract protected function render(phpQueryObject $pqdoc = null);
     
-    protected function addContainer($name, $data)
+    protected function render(phpQueryObject $pqdoc = null)
     {
-        $this->container[$name] = $data;
-    }
-    
-    protected function getContainer($name)
-    {
-        return $this->container[$name];
+        // Please override.
     }
     
     protected function setTemplateDirectory($dir)
@@ -66,12 +59,14 @@ abstract class Fiver_Action //extends Page
         $this->template_dir = $dir;
     }
     
-//     protected function createMessageObject($name, $message)
-//     {
-//         $clazz = new stdClass();
-//         $clazz->$name = $message;
-//         return $clazz;
-//     }
+    protected function component($component_module, $component_name)
+    {
+        $component_module_lower = strtolower($component_module);
+        $component_name_lower   = strtolower($component_name);
+        
+        $view = new FiverTE($this->template_dir . '/component/' . $component_module_lower . '/' . $component_name_lower . self::TEMPLATE_EXTENSION);
+        return $view;
+    }
     
     protected function redirect($location, $http_code = '302')
     {

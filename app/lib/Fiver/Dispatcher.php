@@ -2,7 +2,13 @@
 
 class Fiver_Dispatcher
 {
-    
+    /**
+     * dispatch
+     * 
+     * @param string $module_name
+     * @param string $action_name
+     * @param Fiver_Action $previous_action
+     */
     public static function dispatch($module_name, $action_name, $previous_action = null)
     {
         
@@ -24,7 +30,9 @@ class Fiver_Dispatcher
         }
         
         try {
+            Fiver_Log::mark('fiver_action');
             $buffer = $action->_run();
+            Fiver_Log::performance('fiver_action', get_class($action));
             echo $buffer;
             
         } catch (Fiver_ForwardException $e) {
@@ -41,5 +49,6 @@ class Fiver_Dispatcher
                 redirect302($location);
             }
         }
+        return;
     }
 }

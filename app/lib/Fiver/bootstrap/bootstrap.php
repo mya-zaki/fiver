@@ -16,8 +16,15 @@ require_once('log4php/Logger.php');
 // autoload
 require_once dirname(realpath(__FILE__)) . '/autoload.php';
 
+// log setting
+Logger::configure(APP . '/config/logger_config.xml'); // 設定ファイルの読み込み
+
 // helper
 require_once dirname(realpath(__FILE__)) . '/../helper/functions.php';
+
+// user config
+require_once APP . '/config/define.php';
+require_once APP . '/config/config.php';
 
 // bootstrap
 require_once APP . '/bootstrap/bootstrap.php';

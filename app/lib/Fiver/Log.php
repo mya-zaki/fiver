@@ -19,7 +19,7 @@ class Fiver_Log
     /**
      * Get time as micro second
      *
-     * @return array micro second
+     * @return array micro second object
      */
     public static function utime() {
         return explode(' ',microtime());
@@ -27,12 +27,12 @@ class Fiver_Log
     /**
      * Get difference between the micro second objects
      *
-     * @param array $t1  Micro second object
-     * @param array $t2  Micro second object
+     * @param array $ut1 micro second object
+     * @param array $ut2 micro second object
      * @return int difference as micro second
      */
-    public static function diffutime($t1, $t2) {
-        return (($t1[0] - $t2[0]) + ($t1[1] - $t2[1])) * 1000000;
+    public static function diffutime($ut1, $ut2) {
+        return (($ut1[0] - $ut2[0]) + ($ut1[1] - $ut2[1])) * 1000000;
     }
     
     /**

@@ -48,6 +48,11 @@ class Fiver_Dispatcher
             } else {
                 redirect302($location);
             }
+        } catch (Exception $e) {
+            Fiver_Log::error($e->getMessage());
+            $action = new Error_500Action('Error', '500');
+            $buffer = $action->_run();
+            echo $buffer;
         }
         return;
     }

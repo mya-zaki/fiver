@@ -14,7 +14,7 @@ class Fiver_Container
         return isset($this->container[$name])?$this->container[$name]:$default;
     }
     
-    protected function set($name, $data)
+    public function set($name, $data)
     {
         $this->container[$name] = $data;
     }

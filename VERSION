@@ -1,4 +1,5 @@
-0.1.0
-symfony-1.2.12
-ZendFramework-1.6.2
-log4php-2.0.0
+Fiver-0.1.0
+  symfony-1.2.12　http://symfony.com/legacy
+  ZendFramework-1.6.2　http://framework.zend.com/downloads/archives
+  log4php-2.0.0 http://archive.apache.org/dist/logging/log4php/2.0.0/ https://logging.apache.org/log4php/
+  phpunit-3.4.16 https://github.com/sebastianbergmann/phpunit/tree/3.4 https://phpunit.de/manual/3.4/ja/installation.html

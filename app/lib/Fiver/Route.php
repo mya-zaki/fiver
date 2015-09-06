@@ -20,10 +20,10 @@ class Fiver_Route
         try {
             foreach ($this->rules as $rule) {
                 $pattern      = isset($rule[0])?$rule[0]:null;
-                $defaults     = isset($rule[1])?$rule[1]:array();
+                $params       = isset($rule[1])?$rule[1]:array();
                 $requirements = isset($rule[2])?$rule[2]:array();
-                $options      = isset($rule[3])?$rule[3]:array();
-                $sfroute = new sfRoute($pattern, $defaults, $requirements, $options);
+                $options      = array();
+                $sfroute = new sfRoute($pattern, $params, $requirements, $options);
                 
                 $ret = $sfroute->matchesUrl($this->url);
                 if ($ret !== false) {

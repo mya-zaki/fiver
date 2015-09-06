@@ -15,8 +15,7 @@ abstract class Fiver_Action
     
     protected $template_dir;
     
-    protected $content_type = null; // 'text/html'
-    protected $charset = 'utf-8';
+    protected $response;
     
     public function __construct($module, $action)
     {
@@ -25,6 +24,8 @@ abstract class Fiver_Action
         
         $this->input     = new Fiver_Input();
         $this->container = new Fiver_Container();
+        
+        $this->response = Fiver_Response::getInstance();
         
         $this->setTemplateDirectory(APP . '/template');
     }
@@ -45,8 +46,6 @@ abstract class Fiver_Action
         
         $this->after();
         
-        $this->response();
-        
         return $this->buffer;
     }
     
@@ -57,15 +56,7 @@ abstract class Fiver_Action
     final protected function json($data, $charset = 'utf-8')
     {
         $this->buffer       = Zend_Json::encode($data);
-        $this->content_type = 'application/json';
-        $this->charset      = $charset;
-    }
-    
-    private function response()
-    {
-        if (isset($this->content_type)) {
-            header('Content-Type: ' . $this->content_type . '; charset=utf-8');
-        }
+        $this->response->setHeader('Content-Type: application/json; charset=' . $charset);
     }
     
     protected function render(phpQueryObject $pqdoc = null)

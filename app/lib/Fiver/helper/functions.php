@@ -15,7 +15,8 @@ function redirect302($location)
 function dd($expression = null)
 {
     if (!isset($expression)) {
-        $expression = debug_backtrace();
+        $debug = debug_backtrace();
+        $expression = $debug[0];
     }
     var_dump($expression);
     exit;

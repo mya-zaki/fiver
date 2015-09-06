@@ -1,9 +1,17 @@
 <?php
 //base path
-define('APP', dirname(dirname(dirname(dirname(realpath(__FILE__))))));
-define('ROOT', APP . '/..');
-define('VENDOR', ROOT . '/vendor');
-define('STORAGE', ROOT . '/storage');
+if(!defined('APP')){
+    define('APP', dirname(dirname(dirname(dirname(realpath(__FILE__))))));
+}
+if(!defined('ROOT')){
+    define('ROOT', APP . '/..');
+}
+if(!defined('VENDOR')){
+    define('VENDOR', ROOT . '/vendor');
+}
+if(!defined('STORAGE')){
+    define('STORAGE', ROOT . '/storage');
+}
 
 // include path
 addIncludePath(VENDOR);

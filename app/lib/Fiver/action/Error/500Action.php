@@ -8,7 +8,7 @@ class Error_500Action extends Fiver_Action
     
     protected function after()
     {
-        header('HTTP/1.1 500 Internal Server Error');
+        $this->response->setHeader('HTTP/1.1 500 Internal Server Error');
     }
     
     protected function main()

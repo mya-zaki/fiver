@@ -8,7 +8,7 @@ class Error_404Action extends Fiver_Action
     
     protected function after()
     {
-        header('HTTP/1.1 404 Not Found');
+        $this->response->setHeader('HTTP/1.1 404 Not Found');
     }
     
     protected function main()

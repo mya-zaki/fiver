@@ -16,9 +16,10 @@ class Fiver_Dispatcher
         $action_name_ucfirst = ucfirst(strtolower($action_name));
         
         addIncludePath(APP . '/lib/Fiver/action');
-        addIncludePath(APP . '/action/' . $module_name_ucfirst);
-        if (is_readable(APP . '/action/' . $module_name_ucfirst . '/' . $action_name_ucfirst . 'Action.php')) {
-            $action_class = $module_name_ucfirst . '_' . $action_name_ucfirst . 'Action';
+        addIncludePath(APP . '/action');
+        
+        $action_class = $module_name_ucfirst . '_' . $action_name_ucfirst . 'Action';
+        if (@class_exists($action_class, true)) {
             $action = new $action_class($module_name_ucfirst, $action_name_ucfirst);
         } else {
             $action = new Error_404Action('Error', '404');
@@ -33,6 +34,7 @@ class Fiver_Dispatcher
             Fiver_Log::mark('fiver_action');
             $buffer = $action->_run();
             Fiver_Log::performance('fiver_action', get_class($action));
+            Fiver_Response::getInstance()->sendHeaders();
             echo $buffer;
             
         } catch (Fiver_ForwardException $e) {

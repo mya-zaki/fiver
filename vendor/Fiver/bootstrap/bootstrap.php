@@ -1,7 +1,7 @@
 <?php
 //base path
 if(!defined('APP')){
-    define('APP', dirname(dirname(dirname(dirname(realpath(__FILE__))))));
+    define('APP', dirname(dirname(dirname(dirname(realpath(__FILE__))))) . '/app');
 }
 if(!defined('ROOT')){
     define('ROOT', APP . '/..');

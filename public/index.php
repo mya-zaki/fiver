@@ -1,6 +1,6 @@
 <?php
 // bootstrap
-require_once dirname(dirname(realpath(__FILE__))) . '/app/lib/Fiver/bootstrap/bootstrap.php';
+require_once dirname(dirname(realpath(__FILE__))) . '/vendor/Fiver/bootstrap/bootstrap.php';
 
 Fiver_Log::mark('fiver_req');
 
